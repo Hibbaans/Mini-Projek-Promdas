@@ -1,0 +1,60 @@
+#include <stdio.h>
+
+#define JUMLAH_ITEM 8  // Jumlah total item seblak
+
+int main() 
+{
+    char *item[JUMLAH_ITEM] = 
+    {
+        "Ceker", "Mie", "Telur", "Dumpling",
+        "Sayur", "Bakso", "Sosis", "Kerupuk"
+    };
+
+    int harga[JUMLAH_ITEM] = 
+    {
+        4000, 3000, 3000, 3000,
+        2000, 1500, 1500, 500
+    };
+
+    int jumlah[JUMLAH_ITEM];          // Menyimpan jumlah pembelian
+    int total_per_item[JUMLAH_ITEM];  // Total harga per item
+    int total = 0;                    // Total keseluruhan
+
+    printf("=== Program Seblak Prasmanan ===\n");
+    printf("Daftar Harga Seblak:\n\n");
+    for (int i = 0; i < JUMLAH_ITEM; i++) 
+    {
+        printf("%d. %-10s - Rp%d\n", i + 1, item[i], harga[i]);
+    }
+    
+    printf("\nMasukkan jumlah pembelian (jika negatif, dianggap 0):\n");
+    for (int i = 0; i < JUMLAH_ITEM; i++) 
+    {
+        printf("%s: ", item[i]);
+        scanf("%d", &jumlah[i]);
+
+        // Jika input negatif, ubah jadi 0
+        if (jumlah[i] < 0) 
+        {
+            printf("[Peringatan] Nilai negatif diubah jadi 0.\n");
+            jumlah[i] = 0;
+        }
+
+        total_per_item[i] = jumlah[i] * harga[i];  // Hitung total per item
+    }
+
+    // Memghitung total keseluruhan
+    for (int i = 0; i < JUMLAH_ITEM; i++) 
+    {
+        total += total_per_item[i];
+    }
+
+    // Tampilkan rincian pembelian 
+    printf("\n=== Rincian Pembelian ===\n");
+    for (int i = 0; i < JUMLAH_ITEM; i++) 
+    {
+        printf("%s: %d x Rp%d = Rp%d\n", item[i], jumlah[i], harga[i], total_per_item[i]);
+    }
+    printf("\nTotal Harga Seblak: Rp%d\n", total);
+    return 0;
+}
